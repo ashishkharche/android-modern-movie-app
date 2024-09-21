@@ -3,6 +3,7 @@ package com.example.tmdbapp.ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
@@ -18,15 +19,8 @@ fun MovieListListView(
   onMovieClick: (Movie) -> Unit,
   viewType: String,
   searchQuery: String,
+  listState: LazyListState,
 ) {
-  val lastViewedItemIndex by viewModel.lastViewedItemIndex.collectAsState()
-  val listState =
-    rememberForeverLazyListState(
-      key = "movie_list_${viewType}_$searchQuery",
-      initialFirstVisibleItemIndex = lastViewedItemIndex,
-      initialFirstVisibleItemScrollOffset = 0,
-    )
-
   LazyColumn(
     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
     verticalArrangement = Arrangement.spacedBy(16.dp),
